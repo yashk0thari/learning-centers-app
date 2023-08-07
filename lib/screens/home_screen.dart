@@ -1,5 +1,6 @@
 // Import Relevant Packages:
 import 'package:flutter/material.dart';
+import 'package:lc_app/screens/qr.dart';
 
 import '../common_utils.dart';
 
@@ -84,41 +85,61 @@ class _lc_tokens_barStatefulState extends State<lc_tokens_barStateful> {
 
     String num_lc_tokens = "0015730";
 
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(0, barVerticalOffset, 0, 0),
-      child: Center(
-        child: Container(
-          height: 75,
-          width: barWidth,
-          decoration: BoxDecoration(
-            color: mainBackgroundColor,
-            borderRadius:
-                BorderRadius.circular(10), // Adjust the radius as needed
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
-                child: Image.asset(
-                  'assets/lc_logo.png',
-                  height: 50,
-                ),
-              ),
-              Text(
-                num_lc_tokens,
-                style: TextStyle(
-                  fontFamily: "Mono45Headline",
-                  fontSize: 50,
-                  fontWeight: FontWeight.bold,
-                  color: altColor,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+    // return StreamBuilder<DocumentSnapshot>(
+    //     stream: db.collection('users').doc('user_id').snapshots(),
+    //     builder: (context, snapshot) {
+    //       if (snapshot.connectionState == ConnectionState.waiting) {
+    //         print("Loading...");
+    //       }
+    //
+    //       if (snapshot.hasError) {
+    //         print("Error: ${snapshot.error}");
+    //       }
+    //
+    //       Map<String, dynamic> data =
+    //           snapshot.data!.data() as Map<String, dynamic>;
+    //
+    //       final curr_user = User(
+    //         uid: data['uid'],
+    //         name: data['name'],
+    //         checkType: data['check_type'],
+    //         lcTokens: data['lc_tokens'],
+    //       );
+    //
+    //       return Padding(
+    //         padding: const EdgeInsets.fromLTRB(0, barVerticalOffset, 0, 0),
+    //         child: Center(
+    //           child: Container(
+    //             height: 75,
+    //             width: barWidth,
+    //             decoration: BoxDecoration(
+    //               color: mainBackgroundColor,
+    //               borderRadius:
+    //                   BorderRadius.circular(10), // Adjust the radius as needed
+    //             ),
+    //             child: Row(
+    //               mainAxisAlignment: MainAxisAlignment.center,
+    //               crossAxisAlignment: CrossAxisAlignment.center,
+    //               children: [
+    //                 Padding(
+    //                   padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+    //                   child: Image.asset(
+    //                     'assets/lc_logo.png',
+    //                     height: 50,
+    //                   ),
+    //                 ),
+    //                 Text(
+    //                   curr_user.lcTokens.toString().padLeft(6, '0'),
+    //                   style: mainTextStyle(50, FontWeight.bold, altColor),
+    //                 ),
+    //               ],
+    //             ),
+    //           ),
+    //         ),
+    //       );
+    //     });
+    return Container(
+      height: 100,
     );
   }
 }
@@ -149,12 +170,7 @@ class lc_tabs_list extends StatelessWidget {
                       quarterTurns: 3,
                       child: Text(
                         "Check In",
-                        style: TextStyle(
-                          fontFamily: "Mono45Headline",
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                          color: altColor,
-                        ),
+                        style: mainTextStyle(14, FontWeight.bold, altColor),
                       ),
                     ),
                   ),
@@ -166,7 +182,14 @@ class lc_tabs_list extends StatelessWidget {
               child: AspectRatio(
                 aspectRatio: 1,
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => QRScreen(),
+                      ),
+                    );
+                  },
                   style: ButtonStyle(
                     backgroundColor:
                         MaterialStateProperty.all<Color>(mainBackgroundColor),
@@ -191,12 +214,7 @@ class lc_tabs_list extends StatelessWidget {
                       quarterTurns: 3,
                       child: Text(
                         "Arcade Pass",
-                        style: TextStyle(
-                          fontFamily: "Mono45Headline",
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                          color: altColor,
-                        ),
+                        style: mainTextStyle(14, FontWeight.bold, altColor),
                       ),
                     ),
                   ),
@@ -233,12 +251,7 @@ class lc_tabs_list extends StatelessWidget {
                       quarterTurns: 3,
                       child: Text(
                         "Mini Games",
-                        style: TextStyle(
-                          fontFamily: "Mono45Headline",
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                          color: altColor,
-                        ),
+                        style: mainTextStyle(14, FontWeight.bold, altColor),
                       ),
                     ),
                   ),
@@ -275,12 +288,7 @@ class lc_tabs_list extends StatelessWidget {
                       quarterTurns: 3,
                       child: Text(
                         "Resources",
-                        style: TextStyle(
-                          fontFamily: "Mono45Headline",
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                          color: altColor,
-                        ),
+                        style: mainTextStyle(14, FontWeight.bold, altColor),
                       ),
                     ),
                   ),
@@ -344,12 +352,7 @@ class _lc_events_calendarState extends State<lc_events_calendar> {
             children: <Widget>[
                   Text(
                     "Events",
-                    style: TextStyle(
-                      fontFamily: "Mono45Headline",
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: altColor,
-                    ),
+                    style: mainTextStyle(18, FontWeight.bold, altColor),
                   )
                 ] +
                 events.map((e) {
@@ -388,23 +391,15 @@ class _lc_events_calendarState extends State<lc_events_calendar> {
                 children: [
                   Text(
                     event_name,
-                    style: TextStyle(
-                      fontFamily: "Mono45Headline",
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: mainBackgroundColor,
-                    ),
+                    style:
+                        mainTextStyle(18, FontWeight.bold, mainBackgroundColor),
                   ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, 3, 0, 0),
                     child: Text(
                       event_info,
-                      style: TextStyle(
-                        fontFamily: "Mono45Headline",
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: mainBackgroundColor,
-                      ),
+                      style: mainTextStyle(
+                          14, FontWeight.bold, mainBackgroundColor),
                     ),
                   ),
                 ],

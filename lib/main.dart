@@ -1,8 +1,9 @@
 // Import Relevant Packages:
 import 'package:flutter/material.dart';
 import 'package:lc_app/screens/home_screen.dart';
+import 'package:lc_app/screens/qr.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const LCApp());
 }
@@ -15,7 +16,10 @@ class LCApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: HomeScreen.id,
-      routes: {HomeScreen.id: (context) => HomeScreen()},
+      routes: {
+        HomeScreen.id: (context) => HomeScreen(),
+        QRScreen.id: (context) => QRScreen()
+      },
     );
   }
 }
